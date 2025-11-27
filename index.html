@@ -1021,14 +1021,14 @@
                         <h2 class="text-lg font-bold mb-4 text-slate-800">Resumen</h2>
                         <div class="space-y-3 text-sm text-slate-600 mb-6 pb-6 border-b border-slate-100">
                             <div class="flex justify-between"><span>Subtotal</span> <span
-                                    id="cart-subtotal">$0.00</span></div>
+                                    id="cart-subtotal">S/0.00</span></div>
                             <div class="flex justify-between"><span>Envío</span> <span
                                     class="text-green-600 font-medium">Gratis</span></div>
-                            <div class="flex justify-between"><span>IGV (18%)</span> <span id="cart-tax">$0.00</span>
+                            <div class="flex justify-between"><span>IGV (18%)</span> <span id="cart-tax">S/0.00</span>
                             </div>
                         </div>
                         <div class="flex justify-between font-bold text-xl mb-6 text-slate-900"><span>Total</span> <span
-                                id="cart-total">$0.00</span></div>
+                                id="cart-total">S/0.00</span></div>
                         <button onclick="app.router('checkout')"
                             class="w-full bg-primary text-white py-4 rounded-xl font-bold hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30 flex justify-center items-center gap-2">
                             Pagar Ahora <i data-lucide="credit-card" size="18"></i>
@@ -1148,7 +1148,7 @@
                 <div class="md:col-span-1">
                     <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 sticky top-24">
                         <h3 class="font-bold text-slate-800 mb-4">Total a Pagar</h3>
-                        <div class="text-3xl font-bold text-primary mb-6" id="checkout-total">$0.00</div>
+                        <div class="text-3xl font-bold text-primary mb-6" id="checkout-total">S/0.00</div>
                         <button onclick="app.processPayment()"
                             class="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition shadow-lg shadow-green-500/30 flex justify-center items-center gap-2">
                             <i data-lucide="lock" size="18"></i> Confirmar Pago
@@ -1187,7 +1187,7 @@
                 </div>
                 <div class="flex justify-between items-center">
                     <span class="font-bold text-slate-800">Total Pagado</span>
-                    <span class="font-bold text-primary text-xl" id="success-total">$0.00</span>
+                    <span class="font-bold text-primary text-xl" id="success-total">S/0.00</span>
                 </div>
             </div>
 
@@ -1381,7 +1381,7 @@
                 // Genera un contexto "ligero" del inventario para la IA
                 getInventoryContext: () => {
                     return app.state.products.map(p =>
-                        `{id:${p.id}, nombre:"${p.title}", precio:$${p.price}, desc:${Math.round(p.discountPercentage || 0)}%, cat:"${p.category}"}`
+                        `{id:${p.id}, nombre:"${p.title}", precio:S/${p.price}, desc:${Math.round(p.discountPercentage || 0)}%, cat:"${p.category}"}`
                     ).join(", ");
                 },
 
@@ -1619,7 +1619,7 @@
                         <p class="text-xs text-slate-400 mb-1">${p.category}</p>
                         <h3 class="font-bold text-slate-800 mb-1 truncate">${p.title}</h3>
                         <div class="flex items-center justify-between mt-auto pt-4">
-                            <span class="text-xl font-bold text-slate-900">$${p.price}</span>
+                            <span class="text-xl font-bold text-slate-900">S/${p.price}</span>
                             <button onclick="event.stopPropagation(); app.addToCart(${p.id})" class="bg-primary hover:bg-indigo-700 text-white p-2 rounded-lg transition"><i data-lucide="plus" class="w-5 h-5"></i></button>
                         </div>
                     </div>
@@ -1679,8 +1679,8 @@
                         </div>
                         <div class="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between">
                             <div>
-                                <span class="text-slate-400 text-sm line-through block">$${(p.price * 1.2).toFixed(2)}</span>
-                                <span class="text-3xl font-bold text-slate-900">$${p.price}</span>
+                                <span class="text-slate-400 text-sm line-through block">S/${(p.price * 1.2).toFixed(2)}</span>
+                                <span class="text-3xl font-bold text-slate-900">S/${p.price}</span>
                             </div>
                             <button onclick="app.addToCart(${p.id}); app.closeProductModal()" class="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/30 flex items-center gap-2">
                                 Añadir al Carrito <i data-lucide="shopping-bag" size="18"></i>
@@ -1720,7 +1720,7 @@
                         <img src="${p.thumbnail}" class="w-20 h-20 object-contain bg-slate-50 rounded p-2">
                         <div class="flex-grow">
                             <h3 class="font-bold text-slate-800 truncate max-w-[200px]">${p.title}</h3>
-                            <p class="text-primary font-bold">$${p.price}</p>
+                            <p class="text-primary font-bold">S/${p.price}</p>
                         </div>
                         <div class="flex items-center gap-3 bg-slate-50 rounded-lg p-1">
                             <button onclick="app.updateQty(${item.id}, -1)" class="w-8 h-8 flex items-center justify-center text-slate-600 hover:bg-white rounded shadow-sm">-</button>
@@ -1731,9 +1731,9 @@
                 }).join('');
 
                 const tax = total * 0.18;
-                document.getElementById('cart-subtotal').innerText = `$${total.toFixed(2)}`;
-                document.getElementById('cart-tax').innerText = `$${tax.toFixed(2)}`;
-                document.getElementById('cart-total').innerText = `$${(total + tax).toFixed(2)}`;
+                document.getElementById('cart-subtotal').innerText = `S/${total.toFixed(2)}`;
+                document.getElementById('cart-tax').innerText = `S/${tax.toFixed(2)}`;
+                document.getElementById('cart-total').innerText = `S/${(total + tax).toFixed(2)}`;
                 lucide.createIcons();
             },
 
@@ -1784,7 +1784,7 @@
             renderCheckout: () => {
                 const total = app.state.cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
                 const tax = total * 0.18;
-                document.getElementById('checkout-total').innerText = `$${(total + tax).toFixed(2)}`;
+                document.getElementById('checkout-total').innerText = `S/${(total + tax).toFixed(2)}`;
                 app.setPaymentMethod('card');
             },
 
@@ -1901,7 +1901,7 @@
                 if (!order) { app.router('home'); return; }
                 document.getElementById('success-order-id').innerText = order.id;
                 document.getElementById('success-date').innerText = order.date;
-                document.getElementById('success-total').innerText = `$${order.total}`;
+                document.getElementById('success-total').innerText = `S/${order.total}`;
             },
 
             // UTILS
